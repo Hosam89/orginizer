@@ -1,11 +1,11 @@
 const theme = {
-  Palette: {
-    primary: '#5545e6',
-    secondary: '#006fff',
+  palette: {
+    primary: '#1976d2',
+    secondary: '#414756',
     sucess: '#00ac82',
-    warning: '#ffc14d',
-    error: '#d4000e',
-    info: '#67baa6',
+    warning: '#eee8a9',
+    error: '#c94669',
+    info: '#4a827e',
   },
 
   // Typography Configuration for the App

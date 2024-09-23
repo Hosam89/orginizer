@@ -14,3 +14,10 @@ export const NavigationItems = () => {
     },
   ]
 }
+
+export const getBreakPoints = () => {
+  const breakPoints = {
+    desktop900: '(min-width:900px)',
+  }
+  return breakPoints
+}
