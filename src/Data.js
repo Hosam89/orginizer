@@ -30,6 +30,7 @@ export const jobApplications = [
       'backend developer with 3 years of experience in Node.js and MongoDB',
     notes: 'Need to prepare for coding interview',
     platfrom: 'Glassdoor',
+    AIMdule: 'preplixcity',
   },
   {
     id: 4,
