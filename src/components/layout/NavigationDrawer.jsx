@@ -63,6 +63,8 @@ export default function MiniDrawer({ onDrawerToggle }) {
         return 'Dashboard'
       case '/application':
         return 'Application'
+      case '/profile':
+        return 'Profile'
       default:
         return 'Unknown'
     }
