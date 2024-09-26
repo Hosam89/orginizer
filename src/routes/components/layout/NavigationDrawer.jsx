@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MuiDrawer from '@mui/material/Drawer'
 import MuiAppBar from '@mui/material/AppBar'
@@ -14,21 +13,23 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-
 import { NavigationItems } from '../../utils/MultiPerpFuncitons'
 import { Link, useLocation } from 'react-router-dom'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import theme from '../../../themes/theme'
+
 const drawerWidth = 240
-const openedMixin = (theme) => ({
+
+const openedMixin = {
   width: drawerWidth,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: 'hidden',
-})
+}
 
-const closedMixin = (theme) => ({
+const closedMixin = {
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -38,64 +39,7 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
-})
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: theme.spacing(0, 1),
-  backgroundColor: theme.palette.primary,
-  ...theme.mixins.toolbar,
-}))
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}))
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-      },
-    },
-    {
-      props: ({ open }) => !open,
-      style: {
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-      },
-    },
-  ],
-}))
+}
 
 export default function MiniDrawer({ onDrawerToggle }) {
   const [open, setOpen] = React.useState(false)
@@ -126,14 +70,31 @@ export default function MiniDrawer({ onDrawerToggle }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position='fixed' open={open}>
+      <MuiAppBar
+        position='fixed'
+        sx={{
+          zIndex: theme.zIndex.drawer + 1,
+          transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
+          ...(open && {
+            marginLeft: drawerWidth,
+            width: `calc(100% - ${drawerWidth}px)`,
+            transition: theme.transitions.create(['width', 'margin'], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
+          }),
+        }}
+      >
         <Toolbar>
           <IconButton
             color='inherit'
             aria-label='open drawer'
             onClick={handleDrawerOpen}
             edge='start'
-            sx={[{ marginRight: 5 }, open && { display: 'none' }]}
+            sx={{ marginRight: 5, ...(open && { display: 'none' }) }}
           >
             <MenuIcon />
           </IconButton>
@@ -141,41 +102,68 @@ export default function MiniDrawer({ onDrawerToggle }) {
             {locationName(location.pathname)}
           </Typography>
         </Toolbar>
-      </AppBar>
-      <Drawer variant='permanent' open={open}>
-        <DrawerHeader>
-          <Typography variant='h6'>Orginzer</Typography>
+      </MuiAppBar>
+
+      <MuiDrawer
+        variant='permanent'
+        open={open}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          whiteSpace: 'nowrap',
+          boxSizing: 'border-box',
+          '& .MuiDrawer-paper': {
+            boxShadow: 'none',
+            border: 'none',
+            backgroundColor: 'lightblue',
+            ...(open ? openedMixin : closedMixin),
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            color: 'white',
+            justifyContent: 'space-between',
+            padding: theme.spacing(0, 1),
+            ...theme.mixins.toolbar,
+            backgroundColor: theme.palette.primary,
+          }}
+        >
+          <Typography variant='h6'>Organizer</Typography>
           <IconButton onClick={handleDrawerClose}>
             {open && <MenuOpenIcon />}
           </IconButton>
-        </DrawerHeader>
+        </Box>
         <Divider />
         <List>
           {navigationItems.map((item) => (
             <ListItem key={item.label} disablePadding>
               <Link to={item.bath}>
                 <ListItemButton
-                  sx={[
-                    { minHeight: 48, px: 2.5, mx: 1 },
-
-                    open
+                  sx={{
+                    minHeight: 48,
+                    px: 2.5,
+                    mx: 1,
+                    ...(open
                       ? { justifyContent: 'initial' }
-                      : { justifyContent: 'center' },
-                  ]}
+                      : { justifyContent: 'center' }),
+                  }}
                 >
                   <ListItemIcon sx={open ? { mr: 3 } : { mr: 'auto' }}>
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText
                     primary={item.label}
-                    sx={open ? { opacity: 1 } : { opacity: 0 }}
+                    sx={{ opacity: open ? 1 : 0 }}
                   />
                 </ListItemButton>
               </Link>
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </MuiDrawer>
     </Box>
   )
 }
