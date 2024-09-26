@@ -16,26 +16,27 @@ import ListItemText from '@mui/material/ListItemText'
 import { NavigationItems } from '../../utils/MultiPerpFuncitons'
 import { Link, useLocation } from 'react-router-dom'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
-import theme from '../../../themes/theme'
-
+import theme from '../../themes/theme'
 const drawerWidth = 240
 
 const openedMixin = {
   width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
+  transition:
+    theme.transitions?.create('width', {
+      easing: theme.transitions?.easing?.sharp,
+      duration: theme.transitions?.duration?.enteringScreen,
+    }) || 'none', // Fallback if theme is undefined
   overflowX: 'hidden',
 }
 
 const closedMixin = {
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  transition:
+    theme.transitions?.create('width', {
+      easing: theme.transitions?.easing?.sharp,
+      duration: theme.transitions?.duration?.leavingScreen,
+    }) || 'none', // Fallback if theme is undefined
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(7)} + 1px)`, // Correct usage of spacing
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
@@ -128,7 +129,7 @@ export default function MiniDrawer({ onDrawerToggle }) {
             justifyContent: 'space-between',
             padding: theme.spacing(0, 1),
             ...theme.mixins.toolbar,
-            backgroundColor: theme.palette.primary,
+            backgroundColor: theme.palette.primary.main,
           }}
         >
           <Typography variant='h6'>Organizer</Typography>
@@ -140,7 +141,7 @@ export default function MiniDrawer({ onDrawerToggle }) {
         <List>
           {navigationItems.map((item) => (
             <ListItem key={item.label} disablePadding>
-              <Link to={item.bath}>
+              <Link to={item.path}>
                 <ListItemButton
                   sx={{
                     minHeight: 48,

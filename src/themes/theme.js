@@ -1,13 +1,43 @@
-const theme = {
-  palette: {
-    primary: '#1976d2',
-    secondary: '#414756',
-    sucess: '#00ac82',
-    warning: '#eee8a9',
-    error: '#c94669',
-    info: '#4a827e',
-  },
+import { createTheme } from '@mui/material/styles'
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2', // Use an object with a main property
+    },
+    secondary: {
+      main: '#414756',
+    },
+    success: {
+      main: '#00ac82',
+    },
+    warning: {
+      main: '#eee8a9',
+    },
+    error: {
+      main: '#c94669',
+    },
+    info: {
+      main: '#4a827e',
+    },
+    // Custom colors as per your application requirements
+    applied: {
+      main: '#bbdefb',
+    },
+    interview: {
+      main: '#d1c4e9',
+    },
+    pending: {
+      main: '#fff9c4',
+    },
+    offer: {
+      main: '#c8e6c9',
+    },
+    rejected: {
+      main: '#ffcdd2',
+    },
+  },
+  spacing: 8,
   // Typography Configuration for the App
   typography: {
     fontFamily: 'Roboto, sans-serif',
@@ -32,7 +62,7 @@ const theme = {
     },
   },
 
-  //Custom Styles for the AppBar
+  // Custom Styles for the AppBar
   components: {
     MuiDrawer: {
       styleOverrides: {
@@ -41,6 +71,7 @@ const theme = {
         },
       },
     },
+    // Uncomment this block if you want to customize the AppBar
     // MuiAppBar: {
     //   styleOverrides: {
     //     root: {
@@ -49,6 +80,6 @@ const theme = {
     //   },
     // },
   },
-}
+})
 
 export default theme

@@ -8,7 +8,7 @@ export const jobApplications = [
     jobDescription:
       'full stack developer with 3 years of experience in React, Node.js, and MongoDB',
     notes: 'Need to prepare for coding interview',
-    platfrom: 'Linkedin',
+    platform: 'Linkedin',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const jobApplications = [
     date: '2021-10-05',
     jobDescription: 'frontend developer with 2 years of experience in React',
     notes: 'Need to prepare for coding interview',
-    platfrom: 'Indeed',
+    platform: 'Indeed',
   },
   {
     id: 3,
@@ -29,9 +29,10 @@ export const jobApplications = [
     jobDescription:
       'backend developer with 3 years of experience in Node.js and MongoDB',
     notes: 'Need to prepare for coding interview',
-    platfrom: 'Glassdoor',
+    platform: 'Glassdoor',
     AIMdule: 'preplixcity',
   },
+
   {
     id: 4,
     company: 'Microsoft',
@@ -41,6 +42,17 @@ export const jobApplications = [
     jobDescription:
       'full stack developer with 3 years of experience in React, Node.js, and MongoDB',
     notes: 'Need to prepare for coding interview',
-    platfrom: 'Linkedin',
+    platform: 'Linkedin',
+  },
+  {
+    id: 5,
+    company: 'Google',
+    position: 'Software Engineer',
+    status: 'pending',
+    date: '2021-10-01',
+    jobDescription:
+      'full stack developer with 3 years of experience in React, Node.js, and MongoDB',
+    notes: 'Need to prepare for coding interview',
+    platform: 'Linkedin',
   },
 ]
