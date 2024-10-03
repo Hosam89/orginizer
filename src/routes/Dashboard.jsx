@@ -3,19 +3,22 @@ import React from 'react'
 import { jobApplications } from '../Data'
 import theme from '../themes/theme'
 import { useNavigate } from 'react-router-dom'
-
+import { Box, Grid2 } from '@mui/material'
+import CreateApplicationDialog from '../components/dashboared/CreateApplicationDialog'
+import { useTranslation } from 'react-i18next'
 function Dashboard() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   const columns = [
     {
       field: 'company',
-      headerName: 'Company',
+      headerName: t('company'),
       flex: 1,
     },
     {
       field: 'position',
-      headerName: 'Position',
+      headerName: t('position'),
       flex: 1,
     },
     {
@@ -53,6 +56,15 @@ function Dashboard() {
 
   return (
     <div style={{ minHeight: '400px', marginInline: 'auto', width: '70%' }}>
+      <Grid2 container justifyContent='space-between'>
+        <Grid2 item>
+          <Box>Filter Drop dows</Box>
+        </Grid2>
+
+        <Grid2 item>
+          <CreateApplicationDialog />
+        </Grid2>
+      </Grid2>
       <DataGrid
         rows={jobApplications}
         columns={columns}

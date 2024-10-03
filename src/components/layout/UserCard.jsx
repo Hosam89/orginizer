@@ -16,8 +16,10 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../store/slices/userSlice'
 import { auth } from '../../firebase/config'
 import { signOut } from 'firebase/auth'
+import { useTranslation } from 'react-i18next'
 
 function UserCard() {
+  const { t } = useTranslation()
   const { photoURL, displayName, email } = useSelector(
     (state) => state.user.user
   )
@@ -75,7 +77,7 @@ function UserCard() {
               <LogoutIcon />
             </ListItemIcon>
             <ListItemText
-              primary='Logout'
+              primary={t('logout')}
               primaryTypographyProps={{
                 fontSize: '14px',
                 color: '#757575',

@@ -19,6 +19,9 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import theme from '../../themes/theme'
 
 import UserCard from './UserCard'
+
+import LanguageMenu from './LanguageMenu'
+import { useTranslation } from 'react-i18next'
 const drawerWidth = 240
 
 const openedMixin = {
@@ -47,7 +50,7 @@ const closedMixin = {
 export default function MiniDrawer({ onDrawerToggle }) {
   const [open, setOpen] = React.useState(false)
   const navigationItems = NavigationItems()
-
+  const { t } = useTranslation()
   const handleDrawerOpen = () => {
     setOpen(true)
     onDrawerToggle(true)
@@ -64,7 +67,7 @@ export default function MiniDrawer({ onDrawerToggle }) {
       case '/':
         return 'Dashboard'
       case '/application':
-        return 'Application'
+        return t('application')
       case '/profile':
         return 'Profile'
       default:
@@ -109,6 +112,7 @@ export default function MiniDrawer({ onDrawerToggle }) {
           </Typography>
 
           {/* Box to align the profile logo and logout button on the right */}
+          <LanguageMenu />
           <UserCard />
         </Toolbar>
       </MuiAppBar>
