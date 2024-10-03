@@ -71,6 +71,16 @@ const theme = createTheme({
         },
       },
     },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#8AD07F',
+          },
+          borderRadius: '24px',
+        },
+      },
+    },
     // Uncomment this block if you want to customize the AppBar
     // MuiAppBar: {
     //   styleOverrides: {

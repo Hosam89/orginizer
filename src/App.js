@@ -12,7 +12,8 @@ import theme from './themes/theme'
 import UserProfile from './routes/UserProfile'
 import Login from './routes/Login'
 import { useSelector } from 'react-redux'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -59,6 +60,7 @@ function App() {
               <Login />
             )}
           </BrowserRouter>
+          <ToastContainer />
         </div>
       </ThemeProvider>
     </Provider>

@@ -17,6 +17,8 @@ import { NavigationItems } from '../../utils/MultiPerpFuncitons'
 import { Link, useLocation } from 'react-router-dom'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import theme from '../../themes/theme'
+
+import UserCard from './UserCard'
 const drawerWidth = 240
 
 const openedMixin = {
@@ -101,9 +103,13 @@ export default function MiniDrawer({ onDrawerToggle }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' noWrap component='div'>
+
+          <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1 }}>
             {locationName(location.pathname)}
           </Typography>
+
+          {/* Box to align the profile logo and logout button on the right */}
+          <UserCard />
         </Toolbar>
       </MuiAppBar>
 

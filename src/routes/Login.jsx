@@ -2,19 +2,19 @@ import React from 'react'
 import { Button, Container, Typography, Box } from '@mui/material'
 import GoogleIcon from '@mui/icons-material/Google'
 import { auth, googleProvider } from '../firebase/config'
-import { signInWithPopup } from 'firebase/auth' // Import signInWithPopup from Firebase
+import { signInWithPopup } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/slices/userSlice'
+import { toast } from 'react-toastify'
+import { showToast } from '../utils/MultiPerpFuncitons'
 
 const Login = () => {
   const dispatch = useDispatch()
 
   const handleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider) // Sign in with Google
-      const user = result.user // Get the user object from Firebase
-
-      // Dispatch login action to the Redux store
+      const result = await signInWithPopup(auth, googleProvider)
+      const user = result.user
       dispatch(
         login({
           displayName: user.displayName,
@@ -22,10 +22,22 @@ const Login = () => {
           photoURL: user.photoURL,
         })
       )
-
-      console.log('User logged in:', user)
     } catch (error) {
-      console.error('Error logging in with Google:', error)
+      let errorMessage
+      switch (error.code) {
+        case 'auth/user-cancelled':
+          errorMessage =
+            'You cancelled the login process. Please try again to login.'
+          break
+        case 'auth/popup-closed-by-user':
+          errorMessage =
+            'You closed the login popup. Please try again to login.'
+          break
+        default:
+          errorMessage = 'An unexpected error occurred. Please try again.'
+      }
+
+      showToast(errorMessage, 'error')
     }
   }
 
