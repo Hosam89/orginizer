@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getInitiatls } from '../../utils/MultiPerpFuncitons'
+import { getInitials, showToast } from '../../utils/MultiPerpFunctions'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../store/slices/userSlice'
@@ -18,7 +18,10 @@ import { auth } from '../../firebase/config'
 import { signOut } from 'firebase/auth'
 
 function UserCard() {
-  const user = useSelector((state) => state.user.user)
+  const { photoURL, displayName, email } = useSelector(
+    (state) => state.user.user
+  )
+
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
@@ -27,7 +30,7 @@ function UserCard() {
       await signOut(auth)
       dispatch(logout())
     } catch (error) {
-      console.error('Error signing out: ', error)
+      showToast('User loged out', 'success')
     }
   }
   return (
@@ -36,10 +39,10 @@ function UserCard() {
         sx={{ display: 'flex', alignItems: 'center', ml: 'auto' }}
         onClick={(event) => setAnchorEl(event.currentTarget)}
       >
-        {user.photoURL ? (
-          <Avatar src={user.photoURL} alt={user.displayName} />
+        {photoURL ? (
+          <Avatar src={photoURL} alt={displayName} />
         ) : (
-          <Avatar>{getInitiatls(user.displayName)}</Avatar>
+          <Avatar>{getInitials(displayName)}</Avatar>
         )}
       </Button>
       <Menu
@@ -61,9 +64,9 @@ function UserCard() {
       >
         <ListItem>
           <ListItemAvatar>
-            <Avatar src={user.photoURL} alt={user.displayName} />
+            <Avatar src={photoURL} alt={displayName} />
           </ListItemAvatar>
-          <ListItemText primary={user.displayName} secondary={user.email} />
+          <ListItemText primary={displayName} secondary={email} />
         </ListItem>
 
         <ListItem disablePadding sx={{ margin: '8px 0', height: '48px' }}>

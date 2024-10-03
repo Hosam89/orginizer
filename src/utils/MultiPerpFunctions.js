@@ -29,10 +29,11 @@ export const getBreakPoints = () => {
   return breakPoints
 }
 
-export const getInitiatls = (name) => {
+export const getInitials = (name) => {
+  if (!name) return ''
   return name
     .split(' ')
-    .map((n) => n[0])
+    .map((n) => n[0].toUpperCase())
     .join('')
 }
 

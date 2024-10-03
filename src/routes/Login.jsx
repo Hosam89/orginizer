@@ -5,8 +5,7 @@ import { auth, googleProvider } from '../firebase/config'
 import { signInWithPopup } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/slices/userSlice'
-import { toast } from 'react-toastify'
-import { showToast } from '../utils/MultiPerpFuncitons'
+import { showToast } from '../utils/MultiPerpFunctions'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -20,6 +19,7 @@ const Login = () => {
           displayName: user.displayName,
           email: user.email,
           photoURL: user.photoURL,
+          isUserSignedIn: true,
         })
       )
     } catch (error) {
