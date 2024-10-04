@@ -95,6 +95,8 @@ function Dashboard() {
         columns={columns}
         checkboxSelection
         disableSelectionOnClick
+        disableColumnResize={true}
+        disableColumnMenu
         density='compact'
         onRowClick={(params) => {
           navigate(`/application/${params.id}`)
