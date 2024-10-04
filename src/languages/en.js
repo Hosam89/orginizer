@@ -13,6 +13,10 @@ const en = {
   logout: 'Logout',
   english: 'English',
   german: 'German',
+  addApplication: 'Add Application',
+  cancel: 'Cancel',
+  add: 'Add',
+  requierdField: 'This field is required',
 }
 
 export default en

@@ -1,4 +1,4 @@
-export const jobApplications = [
+export let jobApplications = [
   {
     id: 1,
     company: 'Google',
@@ -32,7 +32,6 @@ export const jobApplications = [
     platform: 'Glassdoor',
     AIMdule: 'preplixcity',
   },
-
   {
     id: 4,
     company: 'Microsoft',

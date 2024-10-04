@@ -12,6 +12,10 @@ const de = {
   logout: 'Ausloggen',
   english: 'Englisch',
   german: 'Deutsch',
+  appApplication: 'Bewerbung hinzufügen',
+  cancel: 'Abbrechen',
+  add: 'Hinzufügen',
+  requierdField: 'Dieses Feld ist erforderlich',
 }
 
 export default de

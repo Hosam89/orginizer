@@ -3,12 +3,22 @@ import React from 'react'
 import { jobApplications } from '../Data'
 import theme from '../themes/theme'
 import { useNavigate } from 'react-router-dom'
-import { Box, Grid2 } from '@mui/material'
+import { Box, Grid2, IconButton } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+
 import CreateApplicationDialog from '../components/dashboared/CreateApplicationDialog'
 import { useTranslation } from 'react-i18next'
+
 function Dashboard() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const [data, setData] = React.useState(jobApplications)
+
+  const handleDeleteRow = (id, e) => {
+    e.stopPropagation()
+    const updatedData = data.filter((row) => row.id !== id)
+    setData(updatedData)
+  }
 
   const columns = [
     {
@@ -52,6 +62,22 @@ function Dashboard() {
       headerName: 'Platform',
       flex: 1,
     },
+    {
+      field: 'actions',
+      headerName: '',
+      renderCell: (params) => (
+        <IconButton
+          aria-label='delete'
+          size='small'
+          onClick={(e) => handleDeleteRow(params.id, e)}
+          sx={{ opacity: 0, transition: 'opacity 0.3s' }}
+        >
+          <DeleteIcon />
+        </IconButton>
+      ),
+      sortable: false,
+      width: 50,
+    },
   ]
 
   return (
@@ -60,13 +86,12 @@ function Dashboard() {
         <Grid2 item>
           <Box>Filter Drop dows</Box>
         </Grid2>
-
         <Grid2 item>
-          <CreateApplicationDialog />
+          <CreateApplicationDialog setData={setData} />
         </Grid2>
       </Grid2>
       <DataGrid
-        rows={jobApplications}
+        rows={data}
         columns={columns}
         checkboxSelection
         disableSelectionOnClick
@@ -96,6 +121,11 @@ function Dashboard() {
           '.MuiDataGrid-footerContainer': {
             borderTop: 'none',
             display: 'none',
+          },
+
+          // Show trash icon only on hover
+          '& .MuiDataGrid-row:hover .MuiIconButton-root': {
+            opacity: 1,
           },
 
           // Custom background colors for different statuses
