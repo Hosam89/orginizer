@@ -16,6 +16,7 @@ const de = {
   cancel: 'Abbrechen',
   add: 'Hinzufügen',
   requierdField: 'Dieses Feld ist erforderlich',
+  at: 'bei',
 }
 
 export default de

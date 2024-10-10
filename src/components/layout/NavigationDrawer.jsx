@@ -22,6 +22,7 @@ import UserCard from './UserCard'
 
 import LanguageMenu from './LanguageMenu'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 const drawerWidth = 240
 
 const openedMixin = {
@@ -39,18 +40,20 @@ const closedMixin = {
     theme.transitions?.create('width', {
       easing: theme.transitions?.easing?.sharp,
       duration: theme.transitions?.duration?.leavingScreen,
-    }) || 'none', // Fallback if theme is undefined
+    }) || 'none',
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`, // Correct usage of spacing
+  width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 }
 
 export default function MiniDrawer({ onDrawerToggle }) {
+  const { t } = useTranslation()
   const [open, setOpen] = React.useState(false)
   const navigationItems = NavigationItems()
-  const { t } = useTranslation()
+  const application = useSelector((state) => state.application)
+
   const handleDrawerOpen = () => {
     setOpen(true)
     onDrawerToggle(true)
@@ -62,17 +65,14 @@ export default function MiniDrawer({ onDrawerToggle }) {
   }
 
   const location = useLocation()
-  const locationName = (location) => {
-    switch (location) {
-      case '/':
-        return 'Dashboard'
-      case '/application':
-        return t('application')
-      case '/profile':
-        return 'Profile'
-      default:
-        return 'Unknown'
+  const locationName = () => {
+    if (String(location.pathname).includes('application')) {
+      return `${t('application')} ${t('at')} ${application.company}`
     }
+    if (String(location.pathname).includes('profile')) {
+      return 'Profile'
+    }
+    return 'Dashboard'
   }
 
   return (
@@ -108,7 +108,7 @@ export default function MiniDrawer({ onDrawerToggle }) {
           </IconButton>
 
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1 }}>
-            {locationName(location.pathname)}
+            {locationName()}
           </Typography>
 
           {/* Box to align the profile logo and logout button on the right */}

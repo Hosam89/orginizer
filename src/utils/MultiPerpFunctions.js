@@ -1,5 +1,5 @@
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded'
-import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRounded'
+// import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRounded'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import { toast } from 'react-toastify'
 export const NavigationItems = () => {
@@ -9,11 +9,11 @@ export const NavigationItems = () => {
       icon: <DashboardRoundedIcon />,
       path: '/',
     },
-    {
-      label: 'Application',
-      icon: <AppRegistrationRoundedIcon />,
-      path: '/application',
-    },
+    // {
+    //   label: 'Application',
+    //   icon: <AppRegistrationRoundedIcon />,
+    //   path: '/application',
+    // },
     {
       label: 'User Profile',
       icon: <ManageAccountsIcon />,

@@ -17,6 +17,7 @@ const en = {
   cancel: 'Cancel',
   add: 'Add',
   requierdField: 'This field is required',
+  at: 'at',
 }
 
 export default en

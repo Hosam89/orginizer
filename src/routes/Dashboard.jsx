@@ -5,11 +5,13 @@ import theme from '../themes/theme'
 import { useNavigate } from 'react-router-dom'
 import { Box, Grid2, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-
+import { useDispatch } from 'react-redux'
+import { setApplication } from '../store/slices/applicationSlice'
 import CreateApplicationDialog from '../components/dashboared/CreateApplicationDialog'
 import { useTranslation } from 'react-i18next'
 
 function Dashboard() {
+  const dispatch = useDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [data, setData] = React.useState(jobApplications)
@@ -83,10 +85,10 @@ function Dashboard() {
   return (
     <div style={{ minHeight: '400px', marginInline: 'auto', width: '70%' }}>
       <Grid2 container justifyContent='space-between'>
-        <Grid2 item>
+        <Grid2>
           <Box>Filter Drop dows</Box>
         </Grid2>
-        <Grid2 item>
+        <Grid2>
           <CreateApplicationDialog setData={setData} />
         </Grid2>
       </Grid2>
@@ -99,6 +101,7 @@ function Dashboard() {
         disableColumnMenu
         density='compact'
         onRowClick={(params) => {
+          dispatch(setApplication(params.row))
           navigate(`/application/${params.id}`)
         }}
         getRowSpacing={(params) => ({
