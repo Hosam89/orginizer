@@ -1,13 +1,13 @@
-import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded'
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 // import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRounded'
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
-import { toast } from 'react-toastify'
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { toast } from "react-toastify";
 export const NavigationItems = () => {
   return [
     {
-      label: 'Dashboard',
+      label: "Dashboard",
       icon: <DashboardRoundedIcon />,
-      path: '/',
+      path: "/",
     },
     // {
     //   label: 'Application',
@@ -15,27 +15,27 @@ export const NavigationItems = () => {
     //   path: '/application',
     // },
     {
-      label: 'User Profile',
+      label: "User Profile",
       icon: <ManageAccountsIcon />,
-      path: '/profile',
+      path: "/profile",
     },
-  ]
-}
+  ];
+};
 
 export const getBreakPoints = () => {
   const breakPoints = {
-    desktop900: '(min-width:900px)',
-  }
-  return breakPoints
-}
+    desktop900: "(min-width:900px)",
+  };
+  return breakPoints;
+};
 
 export const getInitials = (name) => {
-  if (!name) return ''
+  if (!name) return "";
   return name
-    .split(' ')
+    .split(" ")
     .map((n) => n[0].toUpperCase())
-    .join('')
-}
+    .join("");
+};
 
 export const showToast = (message, type) => {
   const fixedValuse = {
@@ -43,37 +43,40 @@ export const showToast = (message, type) => {
     hideProgressBar: true,
     closeOnClick: false,
     draggable: false,
-    theme: 'dark',
+    theme: "dark",
     pauseOnHover: false,
     progress: undefined,
-  }
+  };
   switch (type) {
-    case 'success':
+    case "success":
       toast.success(message, {
-        position: 'bottom-left',
+        position: "bottom-left",
         ...fixedValuse,
-      })
-      break
-    case 'error':
+      });
+      break;
+    case "error":
       toast.error(message, {
-        position: 'bottom-left',
+        position: "bottom-left",
         ...fixedValuse,
-      })
-      break
-    case 'info':
+      });
+      break;
+    case "info":
       toast.info(message, {
-        position: 'bottom-left',
+        position: "bottom-left",
         ...fixedValuse,
-      })
-      break
-    case 'warning':
+      });
+      break;
+    case "warning":
       toast.warn(message, {
-        position: 'bottom-left',
+        position: "bottom-left",
         ...fixedValuse,
-      })
-      break
+      });
+      break;
     default:
-      toast(message)
-      break
+      toast(message);
+      break;
   }
-}
+};
+
+export const drawerWidth = 240;
+export const collapsedWidth = 80;

@@ -1,182 +1,93 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import MuiDrawer from '@mui/material/Drawer'
-import MuiAppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import List from '@mui/material/List'
-import CssBaseline from '@mui/material/CssBaseline'
-import Typography from '@mui/material/Typography'
-import Divider from '@mui/material/Divider'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import { NavigationItems } from '../../utils/MultiPerpFunctions'
-import { Link, useLocation } from 'react-router-dom'
-import MenuOpenIcon from '@mui/icons-material/MenuOpen'
-import theme from '../../themes/theme'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
 
-import UserCard from './UserCard'
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { NavigationItems } from "../../utils/MultiPerpFunctions";
+import { Link } from "react-router-dom";
 
-import LanguageMenu from './LanguageMenu'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-const drawerWidth = 240
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-const openedMixin = {
-  width: drawerWidth,
-  transition:
-    theme.transitions?.create('width', {
-      easing: theme.transitions?.easing?.sharp,
-      duration: theme.transitions?.duration?.enteringScreen,
-    }) || 'none', // Fallback if theme is undefined
-  overflowX: 'hidden',
-}
+import { styled, useTheme } from "@mui/material";
 
-const closedMixin = {
-  transition:
-    theme.transitions?.create('width', {
-      easing: theme.transitions?.easing?.sharp,
-      duration: theme.transitions?.duration?.leavingScreen,
-    }) || 'none',
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-}
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: theme.spacing(1),
+  ...theme.mixins.toolbar,
+}));
 
-export default function MiniDrawer({ onDrawerToggle }) {
-  const { t } = useTranslation()
-  const [open, setOpen] = React.useState(false)
-  const navigationItems = NavigationItems()
-  const application = useSelector((state) => state.application)
+export default function NavigationDrawer({ open, setOpen }) {
+  const navigationItems = NavigationItems();
+  const theme = useTheme();
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
-    onDrawerToggle(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-    onDrawerToggle(false)
-  }
-
-  const location = useLocation()
-  const locationName = () => {
-    if (String(location.pathname).includes('application')) {
-      return `${t('application')} ${t('at')} ${application.company}`
-    }
-    if (String(location.pathname).includes('profile')) {
-      return 'Profile'
-    }
-    return 'Dashboard'
-  }
-
+  const handleToggleDrawer = () => {
+    setOpen(!open);
+  };
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <MuiAppBar
-        position='fixed'
-        sx={{
-          zIndex: theme.zIndex.drawer + 1,
-          transition: theme.transitions.create(['width', 'margin'], {
+    <MuiDrawer
+      variant="permanent"
+      open={open}
+      sx={{
+        "& .MuiDrawer-paper": {
+          width: open ? "260px" : "100px",
+          transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
+            duration: theme.transitions.duration.enteringScreen,
           }),
-          ...(open && {
-            marginLeft: drawerWidth,
-            width: `calc(100% - ${drawerWidth}px)`,
-            transition: theme.transitions.create(['width', 'margin'], {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.enteringScreen,
-            }),
-          }),
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'
-            sx={{ marginRight: 5, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1 }}>
-            {locationName()}
-          </Typography>
-
-          {/* Box to align the profile logo and logout button on the right */}
-          <LanguageMenu />
-          <UserCard />
-        </Toolbar>
-      </MuiAppBar>
-
-      <MuiDrawer
-        variant='permanent'
-        open={open}
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          whiteSpace: 'nowrap',
-          boxSizing: 'border-box',
-          '& .MuiDrawer-paper': {
-            boxShadow: 'none',
-            border: 'none',
-            backgroundColor: 'lightblue',
-            ...(open ? openedMixin : closedMixin),
-          },
-        }}
-      >
+          overflowX: "hidden",
+        },
+      }}
+    >
+      <DrawerHeader>
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            color: 'white',
-            justifyContent: 'space-between',
-            padding: theme.spacing(0, 1),
-            ...theme.mixins.toolbar,
-            backgroundColor: theme.palette.primary.main,
+            transition: theme.transitions.create("margin", {
+              easing: theme.transitions.easing.easeInOut,
+              duration: theme.transitions.duration.standard,
+            }),
+            mt: "4px",
+            marginLeft: open ? "220px" : "-20px",
           }}
         >
-          <Typography variant='h6'>Organizer</Typography>
-          <IconButton onClick={handleDrawerClose}>
-            {open && <MenuOpenIcon />}
+          <IconButton onClick={handleToggleDrawer}>
+            {open ? <ChevronLeftIcon /> : <MenuIcon />}
           </IconButton>
         </Box>
-        <Divider />
-        <List>
-          {navigationItems.map((item) => (
-            <ListItem key={item.label} disablePadding>
-              <Link to={item.path}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    px: 2.5,
-                    mx: 1,
-                    ...(open
-                      ? { justifyContent: 'initial' }
-                      : { justifyContent: 'center' }),
-                  }}
-                >
-                  <ListItemIcon sx={open ? { mr: 3 } : { mr: 'auto' }}>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.label}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-      </MuiDrawer>
-    </Box>
-  )
+      </DrawerHeader>
+      <List>
+        {navigationItems.map((item) => (
+          <ListItem key={item.label} disablePadding>
+            <Link to={item.path}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  px: 2.5,
+                  mx: 1,
+                  ...(open
+                    ? { justifyContent: "initial" }
+                    : { justifyContent: "center" }),
+                }}
+              >
+                <ListItemIcon sx={open ? { mr: 3 } : { mr: "auto" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.label}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </MuiDrawer>
+  );
 }
