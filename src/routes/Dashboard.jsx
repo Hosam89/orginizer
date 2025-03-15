@@ -83,7 +83,7 @@ function Dashboard() {
   ];
 
   return (
-    <Grid2 container p={0} sx={{ height: "calc(100% - 8px)" }} spacing={1}>
+    <div style={{ minHeight: "400px", marginInline: "auto", width: "70%" }}>
       <Grid2 container justifyContent="space-between">
         <Grid2>
           <Box>Filter Drop dows</Box>
@@ -156,7 +156,7 @@ function Dashboard() {
           },
         }}
       />
-    </Grid2>
+    </div>
   );
 }
 

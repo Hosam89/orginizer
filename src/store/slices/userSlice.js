@@ -1,35 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 // Helper function to load user from localStorage
 const loadUserFromLocalStorage = () => {
   try {
-    const serializedUser = localStorage.getItem('user')
-    return serializedUser ? JSON.parse(serializedUser) : null
+    const serializedUser = localStorage.getItem("user");
+    return serializedUser ? JSON.parse(serializedUser) : null;
   } catch (err) {
-    return null
+    return null;
   }
-}
+};
 
-// Initial state with user loaded from localStorage
 const initialState = {
   user: loadUserFromLocalStorage(),
-}
+};
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     login: (state, action) => {
-      state.user = action.payload
-      localStorage.setItem('user', JSON.stringify(action.payload))
+      state.user = action.payload;
     },
     logout: (state) => {
-      state.user = null
-      localStorage.removeItem('user')
+      state.user = null;
     },
   },
-})
+});
 
-export const { login, logout } = userSlice.actions
+export const { login, logout } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

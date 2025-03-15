@@ -13,9 +13,6 @@ import { useTranslation } from "react-i18next";
 import theme from "../../themes/theme";
 
 function Appbar({ drawerOpen }) {
-  console.log("====================================");
-  console.log(drawerOpen);
-  console.log("====================================");
   const { t } = useTranslation();
   const application = useSelector((state) => state.application);
   const location = useLocation();
